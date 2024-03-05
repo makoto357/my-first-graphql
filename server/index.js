@@ -1,12 +1,16 @@
-var express = require('express');
+const express = require('express');
+const colors = require('colors');
 require('dotenv').config();
 var {createHandler} = require('graphql-http/lib/use/express');
 const schema = require('./schema/schema');
 var {ruruHTML} = require('ruru/server');
+const connectDB = require('./config/db');
 
 const port = process.env.PORT || 5000;
 
 var app = express();
+
+connectDB();
 
 // The root provides a resolver function for each API endpoint
 var root = {
