@@ -1,4 +1,5 @@
-const {projects, clients} = require('../sampleData');
+const Article = require('../models/Article');
+const Author = require('../models/Author');
 
 const {
   GraphQLObjectType,
@@ -9,31 +10,34 @@ const {
 } = require('graphql');
 
 // data Type
-// Project Type
-const ProjectType = new GraphQLObjectType({
-  name: 'Project',
+const ArticleType = new GraphQLObjectType({
+  name: 'Article',
   fields: () => ({
     id: {type: GraphQLID},
-    name: {type: GraphQLString},
-    description: {type: GraphQLString},
+    content: {type: GraphQLString},
+    cover_image: {type: GraphQLString},
+    created_at: {type: GraphQLString},
     status: {type: GraphQLString},
-    client: {
-      type: ClientType,
+    summary: {type: GraphQLString},
+    tag: {type: GraphQLString},
+    title: {type: GraphQLString},
+    updated_at: {type: GraphQLString},
+    author: {
+      type: AuthorType,
       // find id from the parent
-      resolve(parent, args) {
-        return clients.find(client => client.id === parent.id);
+      resolve(parent) {
+        return Author.findById(parent.authorId);
       },
     },
   }),
 });
 
-const ClientType = new GraphQLObjectType({
-  name: 'Client',
+const AuthorType = new GraphQLObjectType({
+  name: 'Author',
   fields: () => ({
     id: {type: GraphQLID},
     name: {type: GraphQLString},
     email: {type: GraphQLString},
-    phone: {type: GraphQLString},
   }),
 });
 
@@ -41,33 +45,33 @@ const ClientType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    projects: {
-      type: new GraphQLList(ProjectType),
-      resolve(parent, args) {
-        return projects;
+    articles: {
+      type: new GraphQLList(ArticleType),
+      resolve() {
+        return Article.find();
       },
     },
-    project: {
-      type: ProjectType,
+    article: {
+      type: ArticleType,
       args: {id: {type: GraphQLID}},
       resolve(parent, args) {
-        return projects.find(project => project.id === args.id);
+        return Article.findById(args.id);
       },
     },
-    clients: {
-      type: new GraphQLList(ClientType),
-      resolve(parent, args) {
-        return clients;
+    authors: {
+      type: new GraphQLList(AuthorType),
+      resolve() {
+        return Author.find();
       },
     },
     // to fetch client data
     client: {
-      type: ClientType,
+      type: AuthorType,
       // specify which data to fetch
       args: {id: {type: GraphQLID}},
       // what to return
       resolve(parent, args) {
-        return clients.find(client => client.id === args.id);
+        return Author.findById(args.id);
       },
     },
   },
