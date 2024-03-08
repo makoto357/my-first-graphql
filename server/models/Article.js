@@ -1,17 +1,23 @@
 const mongoose = require('mongoose');
 
-const ArticleSchema = new mongoose.Schema({
-  content: String,
-  cover_image: String,
-  created_at: String,
-  status: String,
-  summary: String,
-  tag: String,
-  title: String,
-  updated_at: String,
-  // ObjectId (_id) is created automatically, when a new record is created in the collection
-  authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'Client'},
-});
+// data format (on mongoDB)
+const ArticleSchema = new mongoose.Schema(
+  {
+    content: String,
+    cover_image: String,
+    summary: String,
+    tag: {
+      type: String,
+      enum: ['Art', 'Art Market'],
+    },
+    title: String,
+    // ObjectId (_id) is created automatically, when a new record is created in the collection
+    authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'Author'},
+  },
+  {
+    timestamps: true,
+  },
+);
 
-// export name of object, and schema
+// export collection name (on mongoDB) and schema
 module.exports = mongoose.model('Article', ArticleSchema);
