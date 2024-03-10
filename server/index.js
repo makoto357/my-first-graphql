@@ -1,5 +1,6 @@
 const express = require('express');
 const colors = require('colors');
+const cors = require('cors');
 require('dotenv').config();
 var {createHandler} = require('graphql-http/lib/use/express');
 const schema = require('./schema/schema');
@@ -11,6 +12,9 @@ const port = process.env.PORT || 5000;
 var app = express();
 
 connectDB();
+
+// Enable All CORS Requests
+app.use(cors());
 
 // The root provides a resolver function for each API endpoint
 var root = {
