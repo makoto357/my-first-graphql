@@ -18,7 +18,7 @@ const ArticleType = new GraphQLObjectType({
     id: {type: GraphQLID},
     // how to get timestamps?
     content: {type: GraphQLString},
-    cover_image: {type: GraphQLString},
+    coverImage: {type: GraphQLString},
     summary: {type: GraphQLString},
     tag: {type: GraphQLString},
     title: {type: GraphQLString},
@@ -109,7 +109,7 @@ const Mutation = new GraphQLObjectType({
       type: ArticleType,
       args: {
         content: {type: GraphQLString},
-        cover_image: {type: GraphQLString},
+        coverImage: {type: GraphQLString},
         summary: {type: GraphQLString},
         tag: {
           type: new GraphQLEnumType({
@@ -128,7 +128,7 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         const article = new Article({
           content: args.content,
-          cover_image: args.cover_image,
+          coverImage: args.coverImage,
           summary: args.summary,
           tag: args.tag,
           title: args.title,
@@ -151,7 +151,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: {type: GraphQLID},
         content: {type: GraphQLString},
-        cover_image: {type: GraphQLString},
+        coverImage: {type: GraphQLString},
         summary: {type: GraphQLString},
         tag: {
           type: new GraphQLEnumType({
@@ -171,7 +171,7 @@ const Mutation = new GraphQLObjectType({
           {
             $set: {
               content: args.content,
-              cover_image: args.cover_image,
+              coverImage: args.coverImage,
               summary: args.summary,
               tag: args.tag,
               title: args.title,

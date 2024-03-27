@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ArticleSchema = new mongoose.Schema(
   {
     content: String,
-    cover_image: String,
+    coverImage: String,
     summary: String,
     tag: {
       type: String,
