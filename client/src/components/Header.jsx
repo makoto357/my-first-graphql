@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 export default function Header() {
   return (
     <div className="flex">
-      <div>hello</div>
+      <a href="/">hello</a>
       <Link to="create">Create new post</Link>;
     </div>
   );
