@@ -32,4 +32,12 @@ const ADD_ARTICLE = gql`
   }
 `;
 
-export {ADD_ARTICLE};
+const DELETE_ARTICLE = gql`
+  mutation DeleteArticle($id: ID!) {
+    deleteArticle(id: $id) {
+      id
+    }
+  }
+`;
+
+export {ADD_ARTICLE, DELETE_ARTICLE};

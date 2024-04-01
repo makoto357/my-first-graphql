@@ -2,6 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useQuery} from '@apollo/client';
 import {GET_ARTICLE} from '../queries/articleQueries';
+import DeleteArticleButton from '../components/DeleteArticleButton';
 
 export default function Article() {
   const {articleId} = useParams();
@@ -11,5 +12,14 @@ export default function Article() {
   // show spinner component while loading
   if (error) return <p>Error : {error.message}</p>;
 
-  return <>{!loading && !error && <div>hello it's article {articleId}</div>}</>;
+  return (
+    <>
+      {!loading && !error && (
+        <>
+          <div>hello it's article {articleId}</div>
+          <DeleteArticleButton articleId={articleId} />
+        </>
+      )}
+    </>
+  );
 }
