@@ -10,4 +10,14 @@ const GET_AUTHORS = gql`
   }
 `;
 
-export {GET_AUTHORS};
+const GET_AUTHOR = gql`
+  query GetAuthor($id: ID!) {
+    author(id: $id) {
+      id
+      name
+      email
+    }
+  }
+`;
+
+export {GET_AUTHORS, GET_AUTHOR};

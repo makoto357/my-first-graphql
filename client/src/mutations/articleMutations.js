@@ -3,7 +3,7 @@ import {gql} from '@apollo/client';
 const ADD_ARTICLE = gql`
   mutation AddArticle(
     $content: String!
-    $cover_image: String!
+    $coverImage: String!
     $summary: String!
     $tag: ArticleStatus!
     $title: String!
@@ -11,7 +11,7 @@ const ADD_ARTICLE = gql`
   ) {
     addArticle(
       content: $content
-      cover_image: $cover_image
+      coverImage: $coverImage
       summary: $summary
       tag: $tag
       title: $title
@@ -19,7 +19,7 @@ const ADD_ARTICLE = gql`
     ) {
       id
       content
-      cover_image
+      coverImage
       summary
       tag
       title
