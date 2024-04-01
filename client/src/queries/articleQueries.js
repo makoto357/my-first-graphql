@@ -5,17 +5,35 @@ const GET_ARTICLES = gql`
     articles {
       id
       content
-      cover_image
+      coverImage
       summary
       tag
       title
-      author: {
+      author {
         id
-            name
-            email
+        name
+        email
       }
     }
   }
 `;
 
-export {GET_ARTICLES};
+const GET_ARTICLE = gql`
+  query GetArticle($id: ID!) {
+    article(id: $id) {
+      id
+      content
+      coverImage
+      summary
+      tag
+      title
+      author {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
+
+export {GET_ARTICLES, GET_ARTICLE};
