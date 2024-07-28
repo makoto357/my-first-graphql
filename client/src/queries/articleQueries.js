@@ -5,7 +5,6 @@ const GET_ARTICLES = gql`
     articles {
       id
       content
-      coverImage
       summary
       tag
       title
@@ -13,6 +12,12 @@ const GET_ARTICLES = gql`
         id
         name
         email
+      }
+      medium {
+        id
+        title
+        videoUrls
+        images
       }
     }
   }
@@ -23,7 +28,6 @@ const GET_ARTICLE = gql`
     article(id: $id) {
       id
       content
-      coverImage
       summary
       tag
       title
@@ -31,6 +35,12 @@ const GET_ARTICLE = gql`
         id
         name
         email
+      }
+      medium {
+        id
+        title
+        videoUrls
+        images
       }
     }
   }

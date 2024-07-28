@@ -25,6 +25,11 @@ const cache = new InMemoryCache({
             return incoming;
           },
         },
+        media: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
       },
     },
   },

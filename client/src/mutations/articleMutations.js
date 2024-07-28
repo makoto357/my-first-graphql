@@ -1,25 +1,24 @@
-import {gql} from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const ADD_ARTICLE = gql`
   mutation AddArticle(
     $content: String!
-    $coverImage: String!
     $summary: String!
     $tag: ArticleStatus!
     $title: String!
     $authorId: ID!
+    $mediaId: ID!
   ) {
     addArticle(
       content: $content
-      coverImage: $coverImage
       summary: $summary
       tag: $tag
       title: $title
       authorId: $authorId
+      mediaId: $mediaId
     ) {
       id
       content
-      coverImage
       summary
       tag
       title
@@ -27,6 +26,12 @@ const ADD_ARTICLE = gql`
         id
         name
         email
+      }
+      medium {
+        id
+        title
+        videoUrls
+        images
       }
     }
   }
@@ -40,4 +45,4 @@ const DELETE_ARTICLE = gql`
   }
 `;
 
-export {ADD_ARTICLE, DELETE_ARTICLE};
+export { ADD_ARTICLE, DELETE_ARTICLE };
