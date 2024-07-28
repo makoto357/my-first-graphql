@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const ArticleSchema = new mongoose.Schema(
   {
     content: String,
-    coverImage: String,
     summary: String,
     tag: {
       type: String,
@@ -13,6 +12,7 @@ const ArticleSchema = new mongoose.Schema(
     title: String,
     // ObjectId (_id) is created automatically, when a new record is created in the collection
     authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'Author'},
+    mediaId: {type: mongoose.Schema.Types.ObjectId, ref: 'Media'},
   },
   {
     timestamps: true,
