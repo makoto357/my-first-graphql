@@ -13,7 +13,7 @@ export default function CreateArticle() {
   const [content, setContent] = useState("");
   const [videos, setVideos] = useState([]);
   const [images, setImages] = useState([]);
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState("art");
   const [authorId, setAuthorId] = useState("");
   const { loading, error, data } = useQuery(GET_AUTHORS);
   const {
@@ -28,7 +28,7 @@ export default function CreateArticle() {
   } = useQuery(GET_ARTICLES);
 
   const [addArticle] = useMutation(ADD_ARTICLE, {
-    variables: { content, summary, tag, title, authorId, mediaId },
+    variables: { content, summary, tag, title, authorId, mediaId: newmediaId },
     // data: {addArticle}} is the data returned when the function is called
     update(cache, { data: { addArticle } }) {
       const { articles } = cache.readQuery({ query: GET_ARTICLES });
@@ -99,16 +99,16 @@ export default function CreateArticle() {
       });
     }
 
-    setTitle('');
-    setSummary('');
-    setContent('');
+    setTitle("");
+    setSummary("");
+    setContent("");
     setVideos([]);
     setImages([]);
-    setTag('');
-    setAuthorId('');
+    setTag("art");
+    setAuthorId("");
   };
 
-  if (loading) return null;
+  if (loading) return <span class="sr-only">Loading...</span>;
   if (error) return "Something Went Wrong";
 
   return (
@@ -121,7 +121,11 @@ export default function CreateArticle() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <select name="category" onChange={(e) => setTag(e.target.value)}>
+          <select
+            name="category"
+            onChange={(e) => setTag(e.target.value)}
+            value={tag}
+          >
             {/* value has to correspond with graphQL enum type */}
             <option value="art">Art</option>
             <option value="art_market">Art Market</option>
@@ -143,6 +147,7 @@ export default function CreateArticle() {
               ))}
             </select>
           </div>
+          <label htmlFor="videos">video</label>
           <input
             type="file"
             name="videos"
@@ -150,6 +155,7 @@ export default function CreateArticle() {
             onChange={(e) => setVideos(e.target.files[0])}
             multiple
           />
+          <label htmlFor="images">image</label>
           <input
             type="file"
             name="images"
